@@ -25,3 +25,7 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Tasks
         fields = ('task', 'description', 'type', 'status')
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Search')
