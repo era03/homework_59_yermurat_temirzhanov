@@ -59,7 +59,15 @@ Tasks
                 </a>
             </td>
         </tr>
+        {% empty %}
+        <h5 class="text-center">No items found.</h5>
         {% endfor %}
     </tbody>
 </table>
+
+
+
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
