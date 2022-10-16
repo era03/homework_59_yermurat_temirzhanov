@@ -1,5 +1,5 @@
 from webapp.models import Tasks
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView
 from webapp.forms import SearchForm
 from django.db.models import Q
 from urllib.parse import urlencode

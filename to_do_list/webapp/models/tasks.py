@@ -18,7 +18,7 @@ class Tasks(models.Model):
     project = models.ForeignKey(
         to='webapp.Projects',
         verbose_name='Проект',
-        related_name='projects',
+        related_name='tasks',
         on_delete=models.CASCADE
     )
     status = models.ForeignKey(

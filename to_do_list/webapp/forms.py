@@ -1,9 +1,6 @@
 from django.forms import ValidationError
-from webapp.models import Tasks
+from webapp.models import Tasks, Projects
 from django import forms
-from django.core.validators import MinLengthValidator
-
-
 
 
 def max_length_validator(string):
@@ -18,8 +15,8 @@ def min_length_validator(string):
     return
 
 
-
 class TaskForm(forms.ModelForm):
+
     task = forms.CharField(validators=(min_length_validator, max_length_validator))
 
     class Meta:
@@ -29,3 +26,12 @@ class TaskForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label='Search')
+
+
+class ProjectForm(forms.ModelForm):
+
+    project = forms.CharField(validators=(min_length_validator, max_length_validator))
+
+    class Meta:
+        model = Projects
+        fields = ('project', 'created_at', 'deadline')
