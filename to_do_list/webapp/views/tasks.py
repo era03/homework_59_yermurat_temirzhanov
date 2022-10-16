@@ -1,22 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect
 from webapp.forms import TaskForm
 from webapp.models import Tasks
-from django.views.generic import UpdateView, TemplateView, CreateView, DeleteView
+from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy, reverse
 
 
 
-class TaskDetailView(TemplateView):
+class TaskDetailView(DetailView):
     template_name = 'task_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['task'] = get_object_or_404(Tasks, pk=kwargs['pk'])
-        return context
-    
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+    model = Tasks
+    context_object_name = 'task'
 
 
 class TaskCreateView(CreateView):
