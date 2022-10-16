@@ -10,8 +10,9 @@ from webapp.views.tasks import TaskCreateView, TaskUpdateView, TaskDeleteView, T
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('tasks/', IndexView.as_view()),
-    path('edit/<int:pk>/', TaskUpdateView.as_view(), name='edit_task'),
-    path('delete/<int:pk>/', TaskDeleteView.as_view(), name='delete_task'),
+    path('tasks/<int:pk>/edit', TaskUpdateView.as_view(), name='edit_task'),
+    path('tasks/<int:pk>/delete/', TaskDeleteView.as_view(), name='delete_task'),
+    path('tasks/<int:pk>/confirm-delete/', TaskDeleteView.as_view(), name='confirm_delete'),
     path('tasks/<int:pk>/', TaskDetailView.as_view(), name='detail_task'),
     path('projects/', ProjectsView.as_view(), name='projects'),
     path('project/<int:pk>/', ProjectDetailView.as_view(), name='project_detail'),
