@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 
@@ -40,6 +41,20 @@ class Tasks(models.Model):
         auto_now=True, 
         verbose_name='Время изменения'
         )
+    deleted_at = models.DateTimeField(
+        verbose_name='Дата удаления', 
+        null=True, 
+        default=None
+    )
+    is_deleted = models.BooleanField(
+        verbose_name='Удалено', 
+        default=False, null=False
+    )
 
     def __str__(self) -> str:
         return f'{self.task} - {self.description} - {self.type} - {self.status}'
+
+    def delete(self, using=None, keep_parents=False):
+        self.deleted_at = timezone.now()
+        self.is_deleted = True
+        self.save()
