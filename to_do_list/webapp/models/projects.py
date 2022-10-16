@@ -24,6 +24,6 @@ class Projects(models.Model):
         blank=True, 
         null=True 
     )
-    
+
     def __str__(self) -> str:
         return f'{self.project}'

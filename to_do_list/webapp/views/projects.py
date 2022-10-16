@@ -1,14 +1,10 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView
 from webapp.models import Projects, Tasks
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from webapp.forms import ProjectForm, TaskForm
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 
-
-class SuccessDetailUrlMixin:
-    def get_success_url(self):
-        return reverse('article_detail', kwargs={'pk': self.object.pk})
 
 class ProjectsView(ListView):
     template_name = 'projects.html'
@@ -22,8 +18,8 @@ class ProjectDetailView(DetailView):
     model = Projects
     context_object_name = 'project'
 
-
-class ProjectCreateView(CreateView, SuccessDetailUrlMixin):
+    
+class ProjectCreateView(CreateView):
     template_name = 'project_create.html'
     form_class = ProjectForm
     model = Projects
@@ -44,3 +40,9 @@ class ProjectTaskCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('projects')
+
+
+class ProjectDeleteView(DeleteView):
+    template_name = 'article_confirm_delete.html'
+    model = Projects
+    success_url = reverse_lazy('index')

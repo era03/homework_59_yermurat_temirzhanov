@@ -13,7 +13,8 @@
         <p class="card-text">Status: {{task.status}}</p>
         <p class="card-text">Date of create: {{task.created_at}}</p>
         <div class="text-center">
-            <form action="{% url 'delete_task' task.pk %} method="post"">
+            <form action="{% url 'confirm_delete' task.pk %}" method="post">
+                {% csrf_token %}
                 <button type="submit" class="btn btn-danger">Yes</button>
                 <a class="btn btn-primary" href="{% url 'index'%}">No</a>
             </form>
