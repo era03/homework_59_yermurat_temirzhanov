@@ -28,7 +28,7 @@ class IndexView(ListView):
         return None
 
     def get_queryset(self):
-        queryset = super().get_queryset().all()
+        queryset = super().get_queryset().exclude(is_deleted=True)
         if self.search_value:
             query = Q(task__icontains=self.search_value)
             print(query.__dict__)
